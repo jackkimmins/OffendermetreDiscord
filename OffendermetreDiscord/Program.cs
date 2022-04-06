@@ -13,6 +13,7 @@ namespace OffendermetreDiscord
         public static string DiscordBotPrivateKey { get; set; }
         public static ulong AdminDiscordID { get; set; }
         public static string DevMachineName { get; set; }
+        public static bool ShouldTickSafeMsgs { get; set; } = false;
     }
 
     class Program

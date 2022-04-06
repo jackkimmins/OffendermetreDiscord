@@ -75,11 +75,15 @@ namespace OffendermetreDiscord
                     else
                     {
                         //React to a non-toxic message with the Offendermetre tick emoji.
-                        await context.Message.AddReactionAsync(m_Client.GetGuild(525411204756406282).Emotes.First(e => e.Name == "OffendermetreTick"));
+                        if (AppConfig.ShouldTickSafeMsgs)
+                            await context.Message.AddReactionAsync(m_Client.GetGuild(525411204756406282).Emotes.First(e => e.Name == "OffendermetreTick"));
                     }
 
                     //Logs to the console.
-                    consoleText.WriteLine($"<{message.Author.ToString()} in {context.Guild.Name}> {message.ToString()}", "MSG-" + (prediction.Prediction ? "Block" : "Safe"), prediction.Prediction ? ConsoleColor.Red : ConsoleColor.Green);
+                    //consoleText.WriteLine($"<{message.Author.ToString()} in {context.Guild.Name}> {message.ToString()}", "MSG-" + (prediction.Prediction ? "Block" : "Safe"), prediction.Prediction ? ConsoleColor.Red : ConsoleColor.Green);
+
+                    if (prediction.Prediction)
+                        consoleText.WriteLine($"<{message.Author.ToString()} in {context.Guild.Name}> has been blocked!", "MSG-Block", ConsoleColor.Red);
                 }
                 else
                 {
